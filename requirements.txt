@@ -1,1 +1,10 @@
 streamlit
+pymysql
+mysql-connector-python==9.0.0
+pandas==2.2.2
+python-dateutil==2.9.0.post0
+pytz==2024.1
+altair==4.2.2
+pymysql>=1.0.0
+sqlalchemy>=2.0.0
+numpy>=1.24.0
