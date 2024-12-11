@@ -26,7 +26,6 @@ def connect_db():
                                 max_overflow=10,    # Maximum number of connections to create above pool_size
                                 connect_args={
                                     'connect_timeout': 60,  # Connection timeout
-                                    'read_timeout': 60      # Read timeout
                                     }
                            )
     # Connect to the database
@@ -162,7 +161,6 @@ def transactions():
                                 max_overflow=10,    # Maximum number of connections to create above pool_size
                                 connect_args={
                                     'connect_timeout': 60,  # Connection timeout
-                                    'read_timeout': 60      # Read timeout
                                     }
                                     )
     # Connect to the database
