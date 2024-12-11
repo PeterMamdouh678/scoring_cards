@@ -8,18 +8,20 @@ pd.set_option('display.max_columns', None)
 from datetime import datetime
 import json
 from db_connect import merged_data
+import streamlit as st
 
 # test_df = data.copy()
 # Connection parameters
 def get_rules():
-    username = 'admin'
-    password = 'Youssef123$'
-    host = 'adva-warehouse.c45dykr9xlqi.eu-west-3.rds.amazonaws.com'
-    port = '3306'
-    database = 'Rule_based'
+    rule_based = st.secrets['rule_based']
+    DB_USERNAME = rule_based['DB_USERNAME']
+    DB_PASSWORD = rule_based['DB_PASSWORD']
+    DB_HOST = rule_based['DB_HOST']
+    DB_PORT = rule_based['DB_PORT']
+    DB_NAME = rule_based['DB_NAME']
 
     # Create the connection engine
-    engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}:{port}/{database}')
+    engine = create_engine(f'mysql+mysqlconnector://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}')
     # Connect to the database
     conn = engine.connect()
 
@@ -128,7 +130,7 @@ def rule_check(test_df):
             # print()
             false_group = apply_actions(false_group, false_actions)
 
-            print(f"True group actions applied for rule {rule_idx}.")
-            print(f"False group actions applied for rule {rule_idx}.")
+            st.write(f"actions applied for rule {one_rule['name'][0]}.")
+            # st.write(f"False group actions applied for rule {one_rule['name'][0]}.")
 
     return true_group, false_group
