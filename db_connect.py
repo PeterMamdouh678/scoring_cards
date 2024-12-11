@@ -6,14 +6,16 @@ import numpy as np
 import pandas as pd
 pd.set_option('display.max_columns', None)
 from datetime import datetime
+import streamlit as st
 
 def connect_db():
     # Connection parameters
-    username = 'admin'
-    password = 'Youssef123$'
-    host = 'adva-warehouse.c45dykr9xlqi.eu-west-3.rds.amazonaws.com'
-    port = '3306'
-    database = 'zoho'
+    zoho = st.secrets['zoho']
+    username = zoho["username"]
+    password = zoho["password"]
+    host = zoho["host"]
+    port = zoho["port"]
+    database = zoho["database"]
 
     # Create the connection engine
     engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}:{port}/{database}')
@@ -135,11 +137,12 @@ def process_data():
 
 def transactions():
     # Connection parameters
-    username = 'admin'
-    password = 'Youssef123$'
-    host = 'adva-warehouse.c45dykr9xlqi.eu-west-3.rds.amazonaws.com'
-    port = '3306'
-    database = 'aman_v_2'
+    aman = st.secrets['aman']
+    username = aman['username']
+    password = aman['password']
+    host = aman['host']
+    port = aman['port']
+    database = aman['database']
 
     # Create the connection engine
     engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}:{port}/{database}',
