@@ -11,14 +11,24 @@ import streamlit as st
 def connect_db():
     # Connection parameters
     zoho = st.secrets['zoho']
-    username = zoho["username"]
-    password = zoho["password"]
-    host = zoho["host"]
-    port = zoho["port"]
-    database = zoho["database"]
+
+    username = zoho['username']
+    password = zoho['password']
+    host = zoho['host']
+    port = zoho['port']
+    database = zoho['database']
 
     # Create the connection engine
-    engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}:{port}/{database}')
+    engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}:{port}/{database}',
+                              pool_recycle=3600,  # Recycle connections after 1 hour
+                                pool_timeout=60,    # Pool timeout
+                                # pool_size=5,        # Maximum pool size
+                                max_overflow=10,    # Maximum number of connections to create above pool_size
+                                connect_args={
+                                    'connect_timeout': 60,  # Connection timeout
+                                    'read_timeout': 60      # Read timeout
+                                    }
+                           )
     # Connect to the database
     conn = engine.connect()
 
@@ -137,23 +147,23 @@ def process_data():
 
 def transactions():
     # Connection parameters
-    aman = st.secrets['aman']
-    username = aman['username']
-    password = aman['password']
-    host = aman['host']
-    port = aman['port']
-    database = aman['database']
+    aman_db = st.secrets['aman']
+    username = aman_db['username']
+    password = aman_db['password']
+    host = aman_db['host']
+    port = aman_db['port']
+    database = aman_db['database']
 
     # Create the connection engine
     engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}:{port}/{database}',
-                            #   pool_recycle=3600,  # Recycle connections after 1 hour
-                            #     pool_timeout=60,    # Pool timeout
-                            #     pool_size=5,        # Maximum pool size
-                            #     max_overflow=10,    # Maximum number of connections to create above pool_size
-                            #     connect_args={
-                            #         'connect_timeout': 60,  # Connection timeout
-                            #         'read_timeout': 60      # Read timeout
-                            #         }
+                              pool_recycle=3600,  # Recycle connections after 1 hour
+                                pool_timeout=60,    # Pool timeout
+                                # pool_size=5,        # Maximum pool size
+                                max_overflow=10,    # Maximum number of connections to create above pool_size
+                                connect_args={
+                                    'connect_timeout': 60,  # Connection timeout
+                                    'read_timeout': 60      # Read timeout
+                                    }
                                     )
     # Connect to the database
     conn = engine.connect()
