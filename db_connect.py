@@ -21,11 +21,11 @@ def connect_db():
     # Create the connection engine
     engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}:{port}/{database}',
                               pool_recycle=3600,  # Recycle connections after 1 hour
-                                pool_timeout=60,    # Pool timeout
+                                pool_timeout=3600,    # Pool timeout
                                 # pool_size=5,        # Maximum pool size
                                 max_overflow=10,    # Maximum number of connections to create above pool_size
                                 connect_args={
-                                    'connect_timeout': 60,  # Connection timeout
+                                    'connect_timeout': 3600,  # Connection timeout
                                     }
                            )
     # Connect to the database
@@ -156,11 +156,11 @@ def transactions():
     # Create the connection engine
     engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}:{port}/{database}',
                               pool_recycle=3600,  # Recycle connections after 1 hour
-                                pool_timeout=60,    # Pool timeout
+                                pool_timeout=3600,    # Pool timeout
                                 # pool_size=5,        # Maximum pool size
                                 max_overflow=10,    # Maximum number of connections to create above pool_size
                                 connect_args={
-                                    'connect_timeout': 60,  # Connection timeout
+                                    'connect_timeout': 3600,  # Connection timeout
                                     }
                                     )
     # Connect to the database
